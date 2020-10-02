@@ -1,7 +1,10 @@
 class TrackerStatus < ActiveRecord::Base
+  include Redmine::SafeAttributes
   unloadable
 
-  attr_accessible :tracker_id, :issue_status_id
+  safe_attributes(
+    'tracker_id',
+    'issue_status_id')
 
   belongs_to :tracker
   belongs_to :predef_issue_status, :class_name => 'IssueStatus', :foreign_key => 'issue_status_id'
